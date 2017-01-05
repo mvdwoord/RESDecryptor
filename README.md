@@ -8,7 +8,7 @@ For now the tool deals with secrets stored in __Task__ objects. Secrets from glo
 
 ## Example
 
-```
+```python
 Python 3.6.0 (default, Jan  2 2017, 17:55:52)
 [GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.42.1)] on darwin
 Type "help", "copyright", "credits" or "license" for more information.
