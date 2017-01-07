@@ -32,7 +32,7 @@ cipher_keys = {
 
 def hexstring_to_wydelist(s):
     """Takes hexadecimal string representation and breaks it up into a list of wydes.
-        This cold be factored into hextsinrg_to_intlist function but it is useful standalone
+        This could be factored into hextsinrg_to_intlist function but it is useful standalone
         for exploring and debugging."""
     n = 4
     return list([s[i:i+n] for i in range(0, len(s), n)])
