@@ -16,15 +16,15 @@ __status__ = "Development"
 # Several cipher keys are in use, depending on the type of task the secret is stored in.
 # I have listed some, but the list can be extended somewhat.
 cipher_keys = {
-    "command": "Grail",
-    "filetask": "17FiLeVerSioN1988",
+    "command"   : "Grail",
+    "filetask"  : "17FiLeVerSioN1988",
     "deploytask": "77DepLoyComPoNent14",
-    "adtask": "ActiveDirectory",
-    "unknown": "Dune2",
-    "wfstudio": "R3SWFsTuD10",
-    "well...": "RES=Gold",
-    "maitask": "Send@Mail",
-    "sshtask": "SSHCommands",
+    "adtask"    : "ActiveDirectory",
+    "unknown"   : "Dune2",
+    "wfstudio"  : "R3SWFsTuD10",
+    "well..."   : "RES=Gold",
+    "maitask"   : "Send@Mail",
+    "sshtask"   : "SSHCommands",
     "domaintask": "TaskDomain",
     "webservice": "WebService"
 }
@@ -40,7 +40,7 @@ def hexstring_to_wydelist(s):
 
 def hexstring_to_intlist(s):
     """Takes hexadecimal string representation and returns a list of numerical values (codepoints)."""
-    return map((lambda x: int(x, 16)), hexstring_to_wydelist(s))
+    return list(map((lambda x: int(x, 16)), hexstring_to_wydelist(s)))
 
 
 def encrypt(s, k):
@@ -54,3 +54,18 @@ def decrypt(s, k):
     encrypted_values = hexstring_to_intlist(s)
     decrypted_values = [(c - ord(k[(i + 1) % len(k)])) for i, c in enumerate(encrypted_values)]
     return "".join(map((lambda x: chr(x)), decrypted_values))
+
+
+def derive_key(p, c):
+    """Derives the cypherkey given a known plain text (p) and cypher text (c)
+    It will not return the key as such, but a string with the length of the original plain text.
+    This contains a part, all or a repetition of the key, depending on plain text, and key length.
+    The string is offset by 1 character with regards to the real key. Example: if the key is 'Command'
+    the string looks like 'ommandCommandComm'.. etc."""
+    plain_ints = [ord(char) for char in p]
+    # print(plain_ints)
+    cypher_ints = hexstring_to_intlist(c)
+    # print(cypher_ints)
+    assert len(cypher_ints) == len(plain_ints), "Plain text and cypher text are different length."
+    key_ints = [c - p for p, c in zip(plain_ints, cypher_ints)]
+    return "".join(map((lambda x: chr(x)), key_ints))
