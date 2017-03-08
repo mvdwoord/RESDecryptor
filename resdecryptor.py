@@ -29,6 +29,32 @@ cipher_keys = {
     "webservice": "WebService"
 }
 
+task_cipher_keys = {
+    "DOMAIN"          : {"username": "Install"},
+    "COMMAND"         : {"username": "Command"},
+    "QFILEVERSION"    : {"username": "17FiLeVerSioN1988"},
+    "SERVICE"         : {"username": "TaskService"},
+    "SOFTGRID"        : {"username": "SoftGrid"},
+    "QSOFTGRID"       : {"username": "SoftGrid"},
+    "WISDOMCOMPONENT" : {"username": "77DepLoyComPoNent14"},
+    "MSI"             : {"dbuser": "SQLScript"},
+    "QEXECUTESQL"     : {"dbuser": "SQLScript"},
+    "DOMAINUSERCREATE": {"logondomainaccount": "ManageDA"},
+    "MANAGEMAILBOX"   : {"domainusername": "DomUserPass"},
+    "QMAILBOX"        : {"domainusername": "DomUserPass"},
+    "PWRSHELL"        : {"username": "Command"},
+    "ADUSER"          : {"domainusername": "DomUserPass"},
+    "VMWARE"          : {"username": "VirtualInfrastructure"},
+    "SSH"             : {"username": "SSHCommands"},
+    "FILEOPERATIONS"  : {"username": "FileOps"},
+    "SMTP"            : {"username": "Send@Mail"},
+    "CTXWORKFLOW"     : {"username": "R3SWFsTuD10"},
+    "SCCMDISTSOFT"    : {"username": "MicSCCM"},
+    "LANDESKDISTSOFT" : {"username": "LANDesk"},
+    "WEBSERVICE"      : {"securitycontext": "WebService"},
+    "QPUBLAPPS"       : {"username": "CitrixApps"}
+}
+
 
 def hexstring_to_wydelist(s):
     """Takes hexadecimal string representation and breaks it up into a list of wydes.
@@ -43,9 +69,14 @@ def hexstring_to_intlist(s):
     return list(map((lambda x: int(x, 16)), hexstring_to_wydelist(s)))
 
 
+def string_to_intlist(s):
+    """Takes a normal string and returns a list of numerical values (codepoints)"""
+    return [ord(c) for c in s]
+
+
 def encrypt(s, k):
     """Encrypts string s with key k."""
-    encrypted_values = [(ord(c) + ord(k[(i + 1) % len(k)])) for i,c in enumerate(s)]
+    encrypted_values = [(ord(c) + ord(k[(i + 1) % len(k)])) for i, c in enumerate(s)]
     return "".join(map((lambda x: format(x, '04X')), encrypted_values))
 
 

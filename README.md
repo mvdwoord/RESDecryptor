@@ -4,7 +4,7 @@ Tool for extracting secrets stored in RES (One) Automation (Manager)
 
 Internal encryption of secrets in RES is fairly straightforward, using a substitution cipher with a small number of hardcoded keys. This tool helps you decrypt secrets, either extracted from building blocks, from the datastore, or otherwise.
 
-For now the tool deals with secrets stored in __Task__ objects. Secrets from global variables are encrypted in a different manner.
+For now the tool deals with secrets stored in __Task__ objects. Secrets stored in parameters and global variables are encrypted in a different manner.
 
 ## Example
 
